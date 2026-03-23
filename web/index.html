@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignalScope</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Third-Party CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo">SignalScope</div>
+        <nav class="nav-links">
+            <button class="nav-btn active" onclick="showPage('time-view', event)">Time</button>
+            <button class="nav-btn" onclick="showPage('3d-view', event)">3D</button>
+            <button class="nav-btn" onclick="showPage('compare-view', event)">Compare</button>
+        </nav>
+    </header>
+
+    <main class="content-container">
+        <!-- Page 1: Time View -->
+        <section id="time-view" class="page-view active">
+            <aside class="sidebar">
+                <h3>Controls</h3>
+                
+                <div class="control-group">
+                    <label>Signal Type</label>
+                    <select id="signal-type">
+                        <option value="sine">Sine</option>
+                        <option value="square">Square</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="ecg">ECG</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label>Noise Level (<span id="noise-val">0.5</span>)</label>
+                    <input type="range" id="noise-level" min="0" max="2" step="0.1" value="0.5">
+                </div>
+                
+                <div class="control-group">
+                    <label>Filter Method</label>
+                    <select id="filter-method">
+                        <option value="moving_average">Moving Average</option>
+                        <option value="gaussian_smooth">Gaussian Smooth</option>
+                        <option value="median_filter">Median Filter</option>
+                        <option value="savitzky_golay">Savitzky-Golay</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label>Window Size</label>
+                    <input type="number" id="window-size" value="9" min="3" max="51" step="2">
+                </div>
+                
+                <button id="apply-btn" class="primary-btn">Apply / Generate</button>
+            </aside>
+            
+            <div class="main-chart-area">
+                <div id="plotly-chart"></div>
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-label">RMSE Before</div>
+                        <div class="stat-value mono" id="stat-rmse-before">0.0000</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">RMSE After</div>
+                        <div class="stat-value mono" id="stat-rmse-after">0.0000</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Noise Reduced %</div>
+                        <div class="stat-value mono" id="stat-noise-pct">0.00%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: 3D View -->
+        <section id="3d-view" class="page-view" style="display: none;">
+            <div class="canvas-container">
+                <div class="small-label">3D Frequency Spectrum — rotate with mouse</div>
+                <div id="three-canvas"></div>
+            </div>
+        </section>
+
+        <!-- Page 3: Compare -->
+        <section id="compare-view" class="page-view" style="display: none;">
+            <div class="table-container">
+                <h2>Filter Method Comparison</h2>
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>RMSE</th>
+                            <th>Noise Reduced %</th>
+                            <th>Best?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="compare-tbody">
+                        <tr>
+                            <td>Moving Average</td>
+                            <td class="mono">-</td>
+                            <td class="mono">-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Gaussian Smooth</td>
+                            <td class="mono">-</td>
+                            <td class="mono">-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Median Filter</td>
+                            <td class="mono">-</td>
+                            <td class="mono">-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Savitzky-Golay</td>
+                            <td class="mono">-</td>
+                            <td class="mono">-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        function showPage(pageId, event) {
+            document.querySelectorAll('.page-view').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(pageId).style.display = 'flex';
+            if(event) {
+                event.target.classList.add('active');
+            }
+        }
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+/* 
+  SignalScope Flat Dark Theme CSS
+*/
+
+:root {
+  --bg: #111418;
+  --surface: #1C2128;
+  --border: #444C56;
+  --accent: #2F81F7;
+  --green: #3FB950;
+  --orange: #DB6D28;
+  --text: #CDD9E5;
+  --muted: #768390;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.mono {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-btn {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.nav-btn:hover {
+  color: var(--text);
+}
+
+.nav-btn.active {
+  color: var(--text);
+  background-color: var(--border);
+}
+
+.content-container {
+  height: calc(100vh - 53px);
+  overflow-y: auto;
+}
+
+.page-view {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Base Page 1: Time View */
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  padding: 20px;
+  border-right: 1px solid var(--border);
+  background-color: var(--bg);
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.control-group {
+  margin-bottom: 16px;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+select, input[type="number"], input[type="range"] {
+  width: 100%;
+  padding: 8px;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+}
+
+.main-chart-area {
+  flex-grow: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+#plotly-chart {
+  width: 100%;
+  height: 400px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-box {
+  flex: 1;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+/* Page 2: 3D View */
+#3d-view {
+  flex-direction: column;
+  padding: 24px;
+}
+
+.canvas-container {
+  width: 100%;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.small-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+#three-canvas {
+  width: 100%;
+  height: 450px;
+}
+
+/* Page 3: Compare */
+#compare-view {
+  padding: 24px;
+  display: block;
+}
+
+.table-container {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.compare-table th, .compare-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.compare-table th {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
