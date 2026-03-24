@@ -2,7 +2,7 @@
 
 College project for Problem 20 — Data Averaging and Interpolation.
 
-## How to run
+## How to run:-
 
 ### Python scripts
 install dependencies first:
